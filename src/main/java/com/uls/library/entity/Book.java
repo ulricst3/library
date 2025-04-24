@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
+@ToString(exclude = "author")
 @NoArgsConstructor
 public class Book {
 
@@ -19,14 +21,4 @@ public class Book {
 	@JsonBackReference
 	private Author author;
 
-
-	// TODO: Why not working?
-	@Override
-	public String toString() {
-		return "Book{" +
-				"id=" + id +
-				", title='" + title + '\'' +
-				", author_id=" + author.getId() +
-				'}';
-	}
 }

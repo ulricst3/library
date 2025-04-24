@@ -24,7 +24,7 @@ public class AuthorController {
 
 	@GetMapping("/authors/{id}")
 	ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
-		log.info("Getting author with id: {}", id);
+		log.info("Retrieving author with id: {}", id);
 		return authorRepository.findById(id)
 				.map(ResponseEntity::ok) // HTTP 200 Ok
 				.orElseGet(() -> ResponseEntity.notFound().build()); // HTTP 404 Not Found
@@ -32,7 +32,7 @@ public class AuthorController {
 
 	@GetMapping("/authors")
 	ResponseEntity<List<Author>> getAllAuthors() {
-		log.info("Getting all authors");
+		log.info("Retrieving all authors");
 		return ResponseEntity.ok(authorRepository.findAll()); // HTTP 200 Ok
 	}
 

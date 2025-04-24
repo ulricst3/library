@@ -2,15 +2,22 @@ spring:
   application:
     name: library
   datasource:
-    url: jdbc:mysql://localhost:3306/tutorial?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/library_schema?useSSL=false&allowPublicKeyRetrieval=true
     username: root
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+#        use_sql_comments: true
     hibernate:
       ddl-auto: update
 server:
   port: 8080
   servlet:
     context-path: /library
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
