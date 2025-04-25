@@ -33,10 +33,10 @@ public class BookController {
 		return ResponseEntity.ok(bookRepository.save(book)); // HTTP 200 Ok
 	}
 
-	@GetMapping("books/{id}")
-	public ResponseEntity<Book> getBookById(@PathVariable Long id) {
-		log.info("Retrieving book with id: {}", id);
-		return bookRepository.findById(id)
+	@GetMapping("books/{bookId}")
+	public ResponseEntity<Book> getBookById(@PathVariable Long bookId) {
+		log.info("Retrieving book with id: {}", bookId);
+		return bookRepository.findById(bookId)
 				.map(ResponseEntity::ok) // HTTP 200 Ok
 				.orElseGet(() -> ResponseEntity.notFound().build()); // HTTP 404 Not Found
 	}
@@ -47,11 +47,11 @@ public class BookController {
 		return ResponseEntity.ok(bookRepository.findAll()); // HTTP 200 Ok
 	}
 
-	@DeleteMapping("/books/{id}")
-	public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
-		log.info("Deleting author with id: {}", id);
-		if (bookRepository.existsById(id)) {
-			bookRepository.deleteById(id);
+	@DeleteMapping("/books/{bookId}")
+	public ResponseEntity<Void> deleteBook(@PathVariable Long bookId) {
+		log.info("Deleting author with id: {}", bookId);
+		if (bookRepository.existsById(bookId)) {
+			bookRepository.deleteById(bookId);
 			return ResponseEntity.noContent().build(); // HTTP 204 No Content
 		} else {
 			return ResponseEntity.notFound().build(); // HTTP 404 Not Found

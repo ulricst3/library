@@ -22,10 +22,10 @@ public class AuthorController {
 		return ResponseEntity.ok(authorRepository.save(author)); // HTTP 200 Ok
 	}
 
-	@GetMapping("/authors/{id}")
-	public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
-		log.info("Retrieving author with id: {}", id);
-		return authorRepository.findById(id)
+	@GetMapping("/authors/{authorId}")
+	public ResponseEntity<Author> getAuthorById(@PathVariable Long authorId) {
+		log.info("Retrieving author with id: {}", authorId);
+		return authorRepository.findById(authorId)
 				.map(ResponseEntity::ok) // HTTP 200 Ok
 				.orElseGet(() -> ResponseEntity.notFound().build()); // HTTP 404 Not Found
 	}
@@ -36,11 +36,11 @@ public class AuthorController {
 		return ResponseEntity.ok(authorRepository.findAll()); // HTTP 200 Ok
 	}
 
-	@DeleteMapping("/authors/{id}")
-	public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
-		log.info("Deleting author with id: {}", id);
-		if (authorRepository.existsById(id)) {
-			authorRepository.deleteById(id);
+	@DeleteMapping("/authors/{authorId}")
+	public ResponseEntity<Void> deleteAuthor(@PathVariable Long authorId) {
+		log.info("Deleting author with id: {}", authorId);
+		if (authorRepository.existsById(authorId)) {
+			authorRepository.deleteById(authorId);
 			return ResponseEntity.noContent().build(); // HTTP 204 No Content
 		} else {
 			return ResponseEntity.notFound().build(); // HTTP 404 Not Found
