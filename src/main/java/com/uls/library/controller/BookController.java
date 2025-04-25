@@ -17,9 +17,9 @@ import java.util.Optional;
 public class BookController {
 
 	@Autowired
-	AuthorRepository authorRepository;
+	private AuthorRepository authorRepository;
 	@Autowired
-	BookRepository bookRepository;
+	private BookRepository bookRepository;
 
 	@PostMapping("/authors/{authorId}/books")
 	public ResponseEntity<Book> addBookToAuthor(
@@ -34,7 +34,7 @@ public class BookController {
 	}
 
 	@GetMapping("books/{id}")
-	ResponseEntity<Book> getBookById(@PathVariable Long id) {
+	public ResponseEntity<Book> getBookById(@PathVariable Long id) {
 		log.info("Retrieving book with id: {}", id);
 		return bookRepository.findById(id)
 				.map(ResponseEntity::ok) // HTTP 200 Ok
@@ -42,13 +42,13 @@ public class BookController {
 	}
 
 	@GetMapping("/books")
-	ResponseEntity<List<Book>> getAllBooks() {
+	public ResponseEntity<List<Book>> getAllBooks() {
 		log.info("Retrieving all books");
 		return ResponseEntity.ok(bookRepository.findAll()); // HTTP 200 Ok
 	}
 
 	@DeleteMapping("/books/{id}")
-	ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
 		log.info("Deleting author with id: {}", id);
 		if (bookRepository.existsById(id)) {
 			bookRepository.deleteById(id);

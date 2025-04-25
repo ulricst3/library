@@ -14,16 +14,16 @@ import java.util.List;
 public class AuthorController {
 
 	@Autowired
-	AuthorRepository authorRepository;
+	private AuthorRepository authorRepository;
 
 	@PostMapping("/authors")
-	ResponseEntity<Author> addAuthor(@RequestBody Author author) {
+	public ResponseEntity<Author> addAuthor(@RequestBody Author author) {
 		log.info("Adding author: {}", author);
 		return ResponseEntity.ok(authorRepository.save(author)); // HTTP 200 Ok
 	}
 
 	@GetMapping("/authors/{id}")
-	ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
+	public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
 		log.info("Retrieving author with id: {}", id);
 		return authorRepository.findById(id)
 				.map(ResponseEntity::ok) // HTTP 200 Ok
@@ -31,13 +31,13 @@ public class AuthorController {
 	}
 
 	@GetMapping("/authors")
-	ResponseEntity<List<Author>> getAllAuthors() {
+	public ResponseEntity<List<Author>> getAllAuthors() {
 		log.info("Retrieving all authors");
 		return ResponseEntity.ok(authorRepository.findAll()); // HTTP 200 Ok
 	}
 
 	@DeleteMapping("/authors/{id}")
-	ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
 		log.info("Deleting author with id: {}", id);
 		if (authorRepository.existsById(id)) {
 			authorRepository.deleteById(id);
